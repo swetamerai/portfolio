@@ -323,6 +323,7 @@ img {
 
 .home__data {
   grid-column: 1/5;
+  width: 20;
 }
 
 .home__title {
