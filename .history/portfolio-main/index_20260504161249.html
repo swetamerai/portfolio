@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sweta Merai | WordPress Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #6c63ff;
+  --gradient: linear-gradient(135deg, #6c63ff, #00c6ff);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0f172a;
+  color: #fff;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+}
+
+.hero span {
+  color: #00c6ff;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: var(--gradient);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+section {
+  padding: 60px 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<nav>
+<h2>Sweta Merai</h2>
+<div>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+
+<section class="hero show">
+<div class="container">
+<h1>WordPress Developer | <span id="typing"></span></h1>
+<p>3+ years experience in custom themes, plugins, and performance optimization.</p>
+<a href="#" class="button">Download CV</a>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<h2>About Me</h2>
+<p>
+Results-driven WordPress Developer with expertise in PHP, JavaScript, MySQL, ACF, and Gutenberg blocks.
+Focused on building scalable, optimized, and high-performance websites.
+</p>
+</div>
+</section>
+
+<section id="skills">
+<div class="container">
+<h2>Skills</h2>
+<div class="cards">
+<div class="card">HTML, CSS, SCSS</div>
+<div class="card">JavaScript, jQuery</div>
+<div class="card">PHP & WordPress</div>
+<div class="card">ACF & Gutenberg</div>
+<div class="card">WooCommerce</div>
+<div class="card">MySQL</div>
+</div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+<h2>Projects</h2>
+<div class="cards">
+<div class="card">
+<h3>Custom WordPress Plugin</h3>
+<p>Dynamic shortcode plugin with API integration.</p>
+</div>
+<div class="card">
+<h3>Performance Optimization</h3>
+<p>Improved site speed by 80% using caching & optimization.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<h2>Contact Me</h2>
+<form onsubmit="sendMessage(event)">
+<input type="text" placeholder="Your Name" required><br><br>
+<input type="email" placeholder="Your Email" required><br><br>
+<textarea placeholder="Message" required></textarea><br><br>
+<button class="button">Send</button>
+</form>
+<p id="msg"></p>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Sweta Merai</p>
+</footer>
+
+<script>
+// typing effect
+const roles = ["Plugin Expert", "Theme Developer", "Performance Specialist"];
+let i = 0, j = 0, current = "", isDeleting = false;
+
+function type() {
+  current = roles[i];
+  
+  document.getElementById("typing").textContent =
+    current.substring(0, j);
+
+  if (!isDeleting && j < current.length) {
+    j++;
+  } else if (isDeleting && j > 0) {
+    j--;
+  } else {
+    isDeleting = !isDeleting;
+    if (!isDeleting) i = (i + 1) % roles.length;
+  }
+
+  setTimeout(type, isDeleting ? 50 : 100);
+}
+
+type();
+
+// scroll animation
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+sections.forEach(sec => observer.observe(sec));
+
+// contact form
+function sendMessage(e) {
+  e.preventDefault();
+  document.getElementById("msg").innerText = "Message sent successfully!";
+}
+</script>
+
+</body>
+</html>
