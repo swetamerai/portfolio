@@ -18,7 +18,21 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;transition:background .3s ease, color .3s ease;}
+  html.light-mode{
+    --bg:#F6F7FA;
+    --bg-soft:#FFFFFF;
+    --card:#FFFFFF;
+    --lime:#0E9C90;
+    --pink:#D9742E;
+    --text:#161B26;
+    --muted:#5B6478;
+    --line:#E3E6ED;
+  }
+  html.light-mode body{background:var(--bg);color:var(--text);}
+  html.light-mode .icon-card{background:#F1F3F7;}
+  html.light-mode header{background:rgba(246,247,250,0.85);}
+  html.light-mode .marquee-wrap{background:var(--bg-soft);}
   ::selection{background:var(--lime);color:#0B0C10;}
   a{color:inherit;text-decoration:none;}
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
@@ -39,6 +53,14 @@
     font-size:0.85rem;font-weight:600;
   }
   .hire-btn:hover{background:var(--pink);color:#fff;}
+
+  #theme-toggle{
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);
+    color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;transition:border-color .25s, transform .25s;
+  }
+  #theme-toggle:hover{border-color:var(--lime);transform:translateY(-2px);}
+  .header-right{display:flex;align-items:center;gap:14px;}
 
   section{padding:120px 6% 80px;max-width:1200px;margin:0 auto;}
 
@@ -187,9 +209,9 @@
     section{padding:90px 6% 50px;}
   }
 
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);}
   .reveal.in{opacity:1;transform:translateY(0);}
-  .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);}
   .reveal-left.in{opacity:1;transform:translateX(0);}
 
   .skills-grid .skill-block:nth-child(1){transition-delay:0s;}
@@ -209,14 +231,17 @@
 <body>
 
 <header>
-  <div class="logo">Sweta<span>.dev</span></div>
+  <div class="logo">Sweta Merai</div>
   <nav>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a href="mailto:meraisweta11@gmail.com" class="hire-btn">Hire Me</a>
+  <div class="header-right">
+    <a href="mailto:meraisweta11@gmail.com" class="hire-btn">Hire Me</a>
+    <button id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">🌙</button>
+  </div>
 </header>
 
 <section class="hero" id="hero">
@@ -289,12 +314,7 @@
 </section>
 
 <section id="about">
-  <div class="about-grid">
-    <div class="about-stats">
-      <div class="about-stat reveal"><div class="num" data-count="4" data-suffix="+">0+</div><div class="lbl">Years Experience</div></div>
-      <div class="about-stat reveal"><div class="num" data-count="10" data-suffix="+">0+</div><div class="lbl">Projects Delivered</div></div>
-      <div class="about-stat reveal"><div class="num" data-count="5" data-suffix="+">0+</div><div class="lbl">API Integrations</div></div>
-    </div>
+  <div class="about-grid" style="grid-template-columns:1fr;max-width:780px;margin:0 auto;">
     <div class="about-text reveal">
       <div class="hero-tag">About Me</div>
       <h2 style="font-size:2rem;margin-bottom:18px;">Hi, I'm Sweta Merai — <span style="color:var(--lime);">WordPress Developer</span></h2>
@@ -380,7 +400,7 @@
 </section>
 
 <footer>
-  <div>Sweta<span style="color:var(--lime);">.dev</span></div>
+  <div>Sweta Merai</div>
   <div>© 2026 Sweta Merai · WordPress Developer</div>
 </footer>
 
@@ -416,11 +436,31 @@
 
   const revealObs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
-  },{threshold:0.15});
+  },{threshold:0.05, rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.reveal, .reveal-left').forEach(el=>revealObs.observe(el));
 </script>
 
 <script>
+  const themeToggle = document.getElementById('theme-toggle');
+  function applyTheme(theme){
+    if(theme === 'light'){
+      document.documentElement.classList.add('light-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      document.documentElement.classList.remove('light-mode');
+      themeToggle.textContent = '🌙';
+    }
+  }
+  let savedTheme = 'dark';
+  try { savedTheme = localStorage.getItem('portfolio-theme') || 'dark'; } catch(e){}
+  applyTheme(savedTheme);
+  themeToggle.addEventListener('click', ()=>{
+    const isLight = document.documentElement.classList.contains('light-mode');
+    const newTheme = isLight ? 'dark' : 'light';
+    applyTheme(newTheme);
+    try { localStorage.setItem('portfolio-theme', newTheme); } catch(e){}
+  });
+
   document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
