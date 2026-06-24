@@ -479,4 +479,485 @@
 </script>
 
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweta Merai | WordPress Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E1A;
+    --bg-soft:#111726;
+    --card:#161D2E;
+    --lime:#4FD1C5;
+    --pink:#F2A65A;
+    --text:#EAEDF5;
+    --muted:#8B93A7;
+    --line:#232A3D;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+  ::selection{background:var(--lime);color:#0B0C10;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 6%;background:rgba(11,12,16,0.8);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-weight:700;font-size:1.15rem;}
+  .logo span{color:var(--lime);}
+  nav{display:flex;gap:32px;align-items:center;}
+  nav a{font-size:0.9rem;color:var(--muted);transition:color .25s;}
+  nav a:hover{color:var(--text);}
+  .hire-btn{
+    background:var(--lime);color:#0B0C10;padding:10px 20px;border-radius:30px;
+    font-size:0.85rem;font-weight:600;
+  }
+  .hire-btn:hover{background:var(--pink);color:#fff;}
+
+  section{padding:120px 6% 80px;max-width:1200px;margin:0 auto;}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;}
+  .hero-tag{color:var(--lime);font-size:0.9rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:18px;}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.2rem);font-weight:700;line-height:1.05;margin-bottom:24px;max-width:880px;}
+  .hero h1 .hl{color:var(--lime);}
+  .hero p{color:var(--muted);font-size:1.15rem;max-width:600px;margin-bottom:36px;}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px;}
+  .btn{padding:15px 30px;border-radius:10px;font-size:0.95rem;font-weight:600;transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
+  .btn-fill{background:var(--lime);color:#0B0C10;}
+  .btn-fill:hover{background:var(--pink);color:#fff;transform:translateY(-3px);}
+  .btn-outline{border:1px solid var(--line);color:var(--text);}
+  .btn-outline:hover{border-color:var(--pink);color:var(--pink);}
+
+  .stat-row{display:flex;gap:60px;flex-wrap:wrap;}
+  .stat-item .num{font-size:2.4rem;font-weight:700;color:var(--lime);font-family:'Space Grotesk',sans-serif;}
+  .stat-item .lbl{font-size:0.85rem;color:var(--muted);margin-top:2px;}
+
+  /* MARQUEE */
+  .marquee-wrap{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:18px 0;overflow:hidden;background:var(--bg-soft);
+  }
+  .marquee{display:flex;gap:50px;white-space:nowrap;animation:scroll-left 22s linear infinite;width:max-content;}
+  .marquee span{font-size:1rem;color:var(--muted);display:flex;align-items:center;gap:10px;}
+  .marquee span::after{content:"✦";color:var(--pink);}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* NUMBERED SECTIONS (skills as services) */
+  .num-block{
+    display:grid;grid-template-columns:140px 1fr;gap:40px;
+    padding:46px 0;border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .num-block:first-of-type{border-top:1px solid var(--line);}
+  .num-tag{font-size:0.85rem;color:var(--pink);font-weight:600;}
+  .num-block h2{font-size:1.8rem;font-weight:600;margin-bottom:10px;line-height:1.2;}
+  .num-block h2 .hl{color:var(--lime);}
+  .num-block p{color:var(--muted);max-width:560px;}
+  .num-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .num-tags span{font-size:0.75rem;color:var(--lime);background:rgba(198,255,61,0.08);padding:5px 12px;border-radius:20px;}
+
+  /* SKILLS - PROFESSIONAL CARD LAYOUT */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+  .skill-block{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:30px 26px;transition:border-color .3s, transform .3s;
+  }
+  .skill-block:hover{border-color:var(--lime);transform:translateY(-4px);}
+  .skill-block-head{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .skill-block-head .sb-icon{
+    width:38px;height:38px;border-radius:10px;
+    background:rgba(79,209,197,0.12);color:var(--lime);
+    display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .skill-block h3{font-size:1.05rem;font-weight:600;color:var(--text);}
+  .icon-grid{display:flex;flex-wrap:wrap;gap:12px;}
+  .icon-card{
+    background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;display:flex;align-items:center;gap:10px;
+    transition:transform .25s, border-color .25s;
+  }
+  .icon-card:hover{transform:translateY(-3px);border-color:var(--lime);}
+  .icon-card img{width:24px;height:24px;object-fit:contain;border-radius:4px;flex-shrink:0;}
+  .icon-card span{font-size:0.82rem;color:var(--text);white-space:nowrap;}
+
+  /* PROCESS */
+  .process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;}
+  .process-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;transition:transform .3s, border-color .3s;}
+  .process-card:hover{transform:translateY(-6px);border-color:var(--lime);}
+  .process-card .pn{font-size:0.85rem;color:var(--pink);font-weight:600;margin-bottom:14px;}
+  .process-card h4{font-size:1.1rem;margin-bottom:8px;}
+  .process-card p{color:var(--muted);font-size:0.9rem;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:center;}
+  .about-stats{display:flex;flex-direction:column;gap:16px;}
+  .about-stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center;}
+  .about-stat .num{font-size:1.8rem;font-weight:700;color:var(--lime);font-family:'Space Grotesk',sans-serif;}
+  .about-stat .lbl{font-size:0.78rem;color:var(--muted);margin-top:4px;}
+  .about-text p{color:var(--muted);line-height:1.8;margin-bottom:16px;}
+  .about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .about-tags span{font-size:0.78rem;color:var(--text);border:1px solid var(--line);padding:6px 14px;border-radius:20px;}
+
+  /* TIMELINE / QUALIFICATION */
+  .tabs{display:flex;gap:14px;margin-bottom:40px;}
+  .tab-btn{padding:10px 24px;border-radius:30px;border:1px solid var(--line);color:var(--muted);font-size:0.9rem;cursor:pointer;background:none;transition:.25s;}
+  .tab-btn.active{background:var(--lime);color:#0B0C10;border-color:var(--lime);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .tl{position:relative;padding-left:30px;border-left:2px solid var(--line);}
+  .tl-item{position:relative;margin-bottom:34px;}
+  .tl-item::before{content:"";position:absolute;left:-37px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--pink);}
+  .tl-date{font-size:0.78rem;color:var(--lime);font-weight:600;margin-bottom:4px;}
+  .tl-role{font-size:1.15rem;font-weight:600;}
+  .tl-org{font-size:0.88rem;color:var(--muted);}
+
+  /* CTA */
+  .cta{
+    text-align:center;background:var(--card);border-radius:24px;padding:70px 6%;
+    border:1px solid var(--line);position:relative;overflow:hidden;
+  }
+  .cta::before{
+    content:"";position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,61,174,0.18), transparent 70%);
+  }
+  .cta .section-tag{color:var(--pink);font-weight:600;font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;}
+  .cta h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:18px;}
+  .cta h2 .hl{color:var(--lime);}
+  .cta p{color:var(--muted);max-width:480px;margin:0 auto 30px;}
+
+  footer{
+    border-top:1px solid var(--line);padding:30px 6%;
+    display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.85rem;
+  }
+
+  /* CHATBOT */
+  #chat-toggle{
+    position:fixed;bottom:26px;right:26px;width:58px;height:58px;border-radius:50%;
+    background:var(--lime);color:#0B0C10;border:none;font-size:1.4rem;cursor:pointer;
+    box-shadow:0 8px 22px rgba(198,255,61,0.3);z-index:200;
+  }
+  #chat-widget{
+    position:fixed;bottom:96px;right:26px;width:320px;max-height:440px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 14px 34px rgba(0,0,0,0.5);display:none;flex-direction:column;z-index:200;overflow:hidden;
+  }
+  #chat-widget.open{display:flex;}
+  #chat-header{background:var(--bg-soft);padding:14px 16px;font-size:0.85rem;display:flex;justify-content:space-between;align-items:center;}
+  #chat-header button{background:none;border:none;color:var(--text);cursor:pointer;}
+  #chat-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:0.86rem;}
+  .chat-msg{max-width:85%;padding:9px 12px;border-radius:10px;line-height:1.4;}
+  .chat-msg.bot{background:var(--bg-soft);align-self:flex-start;}
+  .chat-msg.user{background:var(--lime);color:#0B0C10;align-self:flex-end;}
+  #chat-form{display:flex;border-top:1px solid var(--line);}
+  #chat-input{flex:1;border:none;padding:12px 14px;background:var(--card);color:var(--text);font-family:inherit;font-size:0.85rem;}
+  #chat-input:focus{outline:none;}
+  #chat-form button{background:var(--lime);color:#0B0C10;border:none;width:46px;cursor:pointer;}
+
+  @media(max-width:860px){
+    nav{display:none;}
+    .num-block{grid-template-columns:1fr;gap:14px;}
+    .about-grid{grid-template-columns:1fr;}
+    section{padding:90px 6% 50px;}
+  }
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal-left.in{opacity:1;transform:translateX(0);}
+
+  @media(prefers-reduced-motion:reduce){
+    .reveal,.reveal-left{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Sweta<span>.dev</span></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="mailto:meraisweta11@gmail.com" class="hire-btn">Hire Me</a>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-tag">WordPress Developer</div>
+  <h1>I Build WordPress Sites That <span class="hl">Actually Perform.</span></h1>
+  <p>Custom themes, Gutenberg blocks, and scalable plugin development — focused on speed, functionality, and clean code that just works.</p>
+  <div class="btn-row">
+    <a href="assets/pdf/Sweta_Merai_Resume.pdf" class="btn btn-fill">Download CV ↓</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+  <div class="stat-row">
+    <div class="stat-item"><div class="num" data-count="4" data-suffix="+">0+</div><div class="lbl">Years Experience</div></div>
+    <div class="stat-item"><div class="num" data-count="10" data-suffix="+">0+</div><div class="lbl">Projects Delivered</div></div>
+    <div class="stat-item"><div class="num" data-count="5" data-suffix="+">0+</div><div class="lbl">API Integrations</div></div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<section id="skills">
+  <div style="text-align:center;margin-bottom:50px;">
+    <div class="hero-tag" style="justify-content:center;display:flex;">My Technical Skills</div>
+    <h2 style="font-size:2.2rem;">Skills</h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-block reveal">
+      <div class="skill-block-head"><div class="sb-icon">🎨</div><h3>Frontend</h3></div>
+      <div class="icon-grid">
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"><span>HTML5</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"><span>CSS3</span></div>
+        <div class="icon-card"><img src="assets/img/SCSS.png"><span>SCSS</span></div>
+        <div class="icon-card"><img src="assets/img/bootsrap.svg"><span>Bootstrap 5.3</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original-wordmark.svg"><span>jQuery</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"><span>React.js</span></div>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-head"><div class="sb-icon">⚙️</div><h3>Backend & CMS</h3></div>
+      <div class="icon-grid">
+        <div class="icon-card"><img src="assets/img/php.png"><span>PHP</span></div>
+        <div class="icon-card"><img src="assets/img/wordpress.png"><span>WordPress</span></div>
+        <div class="icon-card"><img src="assets/img/wocommerce.png"><span>WooCommerce</span></div>
+        <div class="icon-card"><img src="assets/img/acf-logo.png"><span>ACF</span></div>
+        <div class="icon-card"><img src="assets/img/mysql.png"><span>MySQL</span></div>
+        <div class="icon-card"><img src="assets/img/t_500x300.jpeg"><span>Elementor</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"><span>Database Migration</span></div>
+        <div class="icon-card"><img src="https://cdn.simpleicons.org/fastapi/4FD1C5"><span>REST API</span></div>
+        <div class="icon-card"><img src="assets/img/wocommerce.png"><span>WooCommerce Customization</span></div>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-head"><div class="sb-icon">🛠️</div><h3>Tools & Workflow</h3></div>
+      <div class="icon-grid">
+        <div class="icon-card"><img src="assets/img/github.png"><span>GitHub</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg"><span>VS Code</span></div>
+        <div class="icon-card"><img src="assets/img/visual_studio2.png"><span>Visual Studio</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg"><span>Postman</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original-wordmark.svg"><span>Jira</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg"><span>GitLab</span></div>
+        <div class="icon-card"><img src="https://cdn.simpleicons.org/zoho/4FD1C5"><span>Zoho</span></div>
+        <div class="icon-card"><img src="https://cdn.simpleicons.org/googlegemini/4FD1C5"><span>Gemini AI</span></div>
+        <div class="icon-card"><img src="https://cdn.simpleicons.org/openai/4FD1C5"><span>ChatGPT</span></div>
+        <div class="icon-card"><img src="https://cdn.simpleicons.org/claude/4FD1C5"><span>Claude AI</span></div>
+        <div class="icon-card"><img src="https://cdn.simpleicons.org/googlepagespeedinsights/4FD1C5"><span>PageSpeed Insights</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-stats">
+      <div class="about-stat reveal"><div class="num" data-count="4" data-suffix="+">0+</div><div class="lbl">Years Experience</div></div>
+      <div class="about-stat reveal"><div class="num" data-count="10" data-suffix="+">0+</div><div class="lbl">Projects Delivered</div></div>
+      <div class="about-stat reveal"><div class="num" data-count="5" data-suffix="+">0+</div><div class="lbl">API Integrations</div></div>
+    </div>
+    <div class="about-text">
+      <div class="hero-tag">About Me</div>
+      <h2 style="font-size:2rem;margin-bottom:18px;">Hi, I'm Sweta Merai — <span style="color:var(--lime);">WordPress Developer</span></h2>
+      <p>Results-driven WordPress Developer with 4+ years of experience in custom theme and plugin development, focused on functionality, scalability, and performance.</p>
+      <p>Proficient in PHP, JavaScript, MySQL, and WordPress core functions, with hands-on experience building Gutenberg blocks and integrating ACF. Skilled in API integration, database handling, and debugging complex problems efficiently.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:6px;">
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">Custom Theme & Plugin Development</strong> — building WordPress themes and plugins from scratch, tailored to client requirements.</span></li>
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">WooCommerce Customization</strong> — building and tailoring online stores with custom product logic, checkout flows, and plugin integrations.</span></li>
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">WordPress Server Migration</strong> — migrating full WordPress sites (files, database, configs) from old servers to new hosting environments with zero/minimal downtime.</span></li>
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">API Integration</strong> — connecting WordPress with third-party services and REST APIs for seamless data flow.</span></li>
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">Website Speed & Performance Optimization</strong> — improving load times through caching, query optimization, and asset minification.</span></li>
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">Gutenberg Block & ACF Development</strong> — creating custom, reusable blocks and fields for flexible content management.</span></li>
+        <li style="display:flex;align-items:flex-start;gap:10px;color:var(--muted);"><span style="color:var(--lime);font-weight:700;">✓</span><span><strong style="color:var(--text);">Database Handling & Debugging</strong> — managing MySQL databases and resolving complex backend issues efficiently.</span></li>
+      </ul>
+      <div class="about-tags">
+        <span>PHP (OOP)</span><span>WordPress</span><span>Gutenberg</span><span>ACF</span><span>WooCommerce</span><span>MySQL</span><span>Git</span><span>Docker</span><span>Server Migration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div style="text-align:center;margin-bottom:50px;">
+    <div class="hero-tag" style="justify-content:center;display:flex;">My Journey</div>
+    <h2 style="font-size:2.2rem;">Qualification</h2>
+  </div>
+  <div class="tabs" style="justify-content:center;">
+    <button class="tab-btn active" data-tab="work">Work</button>
+    <button class="tab-btn" data-tab="edu">Education</button>
+  </div>
+  <div class="tab-panel active" id="work" style="max-width:700px;margin:0 auto;">
+    <div class="tl">
+      <div class="tl-item reveal-left">
+        <div class="tl-date">1 July 2022 — Present</div>
+        <div class="tl-role">WordPress Developer</div>
+        <div class="tl-org">August Infotech, Surat</div>
+        <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-top:10px;">
+          Developing and maintaining custom WordPress websites for clients across industries. Building custom themes and plugins, integrating ACF and Gutenberg blocks, customizing WooCommerce stores, and handling end-to-end website migrations from old to new servers. Responsible for performance optimization, API integrations, debugging, and ensuring smooth, scalable, production-ready code.
+        </p>
+      </div>
+      <div class="tl-item reveal-left">
+        <div class="tl-date">3 January 2022 — 1 July 2022</div>
+        <div class="tl-role">Internship</div>
+        <div class="tl-org">August Infotech, Surat</div>
+        <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-top:10px;">
+          Started hands-on training in WordPress development — learning PHP, theme structure, plugin basics, and WordPress core functions. Assisted in building and testing small website modules under senior developer guidance, which laid the foundation for moving into a full-time developer role.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel" id="edu" style="max-width:700px;margin:0 auto;">
+    <div class="tl">
+      <div class="tl-item reveal-left">
+        <div class="tl-date">Jan 2020 — April 2022</div>
+        <div class="tl-role">Master of Computer Application</div>
+        <div class="tl-org">Gujarat Technological University</div>
+        <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-top:10px;">
+          Postgraduate study covering advanced programming concepts, database management systems, web technologies, and software engineering principles — building the technical base used in real-world WordPress and full-stack development work.
+        </p>
+      </div>
+      <div class="tl-item reveal-left">
+        <div class="tl-date">Jan 2018 — April 2020</div>
+        <div class="tl-role">Bachelor of Computer Application</div>
+        <div class="tl-org">Veer Narmad South Gujarat University, India</div>
+        <p style="color:var(--muted);font-size:0.92rem;line-height:1.7;margin-top:10px;">
+          Undergraduate degree focused on core computer science fundamentals — programming languages, data structures, DBMS, and the basics of web development that sparked an early interest in building websites.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="cta">
+    <div class="section-tag">Let's Work Together</div>
+    <h2>Ready to Build Something <span class="hl">Great?</span></h2>
+    <p>Open to new opportunities, freelance projects, and collaborations. I reply within 24 hours.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="mailto:meraisweta11@gmail.com" class="btn btn-fill">✉ Email Me</a>
+      <a href="https://www.linkedin.com/in/sweta-merai/" target="_blank" class="btn btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Sweta<span style="color:var(--lime);">.dev</span></div>
+  <div>© 2026 Sweta Merai · WordPress Developer</div>
+</footer>
+
+<button id="chat-toggle" aria-label="Open chat">💬</button>
+<div id="chat-widget">
+  <div id="chat-header">
+    <span>Chat with Sweta's assistant</span>
+    <button id="chat-close" aria-label="Close chat">✕</button>
+  </div>
+  <div id="chat-body"></div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" placeholder="Ask about skills, experience..." autocomplete="off">
+    <button type="submit">→</button>
+  </form>
+</div>
+
+<script>
+  function animateCount(el){
+    const target = parseInt(el.getAttribute('data-count'),10);
+    const suffix = el.getAttribute('data-suffix')||'';
+    const duration=1100, start=performance.now();
+    function step(now){
+      const p = Math.min((now-start)/duration,1);
+      el.textContent = Math.floor(p*target)+suffix;
+      if(p<1) requestAnimationFrame(step); else el.textContent=target+suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  const statObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); statObs.unobserve(e.target); } });
+  },{threshold:0.4});
+  document.querySelectorAll('[data-count]').forEach(el=>statObs.observe(el));
+
+  const revealObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el=>revealObs.observe(el));
+</script>
+
+<script>
+  const tags = ["WordPress","PHP","Gutenberg Blocks","ACF","WooCommerce","MySQL","React.js","Git","Docker","REST API","Bootstrap","jQuery","GitLab","Zoho","Database Migration"];
+  const marquee = document.getElementById('marquee');
+  const loopTags = [...tags, ...tags];
+  loopTags.forEach(t=>{
+    const span = document.createElement('span');
+    span.textContent = t;
+    marquee.appendChild(span);
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+<script>
+  const toggle = document.getElementById('chat-toggle');
+  const widget = document.getElementById('chat-widget');
+  const closeBtn = document.getElementById('chat-close');
+  const body = document.getElementById('chat-body');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  let greeted=false;
+  toggle.addEventListener('click', ()=>{
+    widget.classList.toggle('open');
+    if(!greeted){ addMsg("Hi! I'm Sweta's assistant 👋 Ask me about her skills, experience, or contact info.", 'bot'); greeted=true; }
+  });
+  closeBtn.addEventListener('click', ()=> widget.classList.remove('open'));
+
+  const faq = [
+    { keys:['skill','tech','stack','language'], reply:"Sweta works with PHP, JavaScript, React.js, WordPress (themes, plugins, Gutenberg blocks), ACF, WooCommerce, MySQL, REST APIs, Git, GitLab, Zoho, Docker, and database migration." },
+    { keys:['experience','years','work'], reply:"She has 4+ years of experience as a WordPress Developer at August Infotech, Surat." },
+    { keys:['contact','email','phone','reach','hire'], reply:"Email: meraisweta11@gmail.com" },
+    { keys:['resume','cv'], reply:"Use the 'Download CV' button at the top of the page." },
+    { keys:['location','based','where'], reply:"She's based in Dharampur, Valsad, India." },
+    { keys:['hello','hi','hey'], reply:"Hello! How can I help you learn more about Sweta's work?" }
+  ];
+  function getReply(msg){
+    const lower = msg.toLowerCase();
+    for(const f of faq){ if(f.keys.some(k=>lower.includes(k))) return f.reply; }
+    return "Thanks! For specific queries, email meraisweta11@gmail.com.";
+  }
+  form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const val = input.value.trim();
+    if(!val) return;
+    addMsg(val,'user'); input.value='';
+    setTimeout(()=>addMsg(getReply(val),'bot'),350);
+  });
+</script>
+
+</body>
 </html>
