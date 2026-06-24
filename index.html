@@ -1,812 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweta Merai | WordPress Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E1A;
+    --bg-soft:#111726;
+    --card:#161D2E;
+    --lime:#4FD1C5;
+    --pink:#F2A65A;
+    --text:#EAEDF5;
+    --muted:#8B93A7;
+    --line:#232A3D;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+  ::selection{background:var(--lime);color:#0B0C10;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
 
-    <!--==================== UNICONS ====================-->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 6%;background:rgba(11,12,16,0.8);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-weight:700;font-size:1.15rem;}
+  .logo span{color:var(--lime);}
+  nav{display:flex;gap:32px;align-items:center;}
+  nav a{font-size:0.9rem;color:var(--muted);transition:color .25s;}
+  nav a:hover{color:var(--text);}
+  .hire-btn{
+    background:var(--lime);color:#0B0C10;padding:10px 20px;border-radius:30px;
+    font-size:0.85rem;font-weight:600;
+  }
+  .hire-btn:hover{background:var(--pink);color:#fff;}
 
-    <!--==================== DEVICON ====================-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  section{padding:120px 6% 80px;max-width:1200px;margin:0 auto;}
 
-    <!--==================== SWIPER CSS ====================-->
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;}
+  .hero-tag{color:var(--lime);font-size:0.9rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:18px;}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.2rem);font-weight:700;line-height:1.05;margin-bottom:24px;max-width:880px;}
+  .hero h1 .hl{color:var(--lime);}
+  .hero p{color:var(--muted);font-size:1.15rem;max-width:600px;margin-bottom:36px;}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px;}
+  .btn{padding:15px 30px;border-radius:10px;font-size:0.95rem;font-weight:600;transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
+  .btn-fill{background:var(--lime);color:#0B0C10;}
+  .btn-fill:hover{background:var(--pink);color:#fff;transform:translateY(-3px);}
+  .btn-outline{border:1px solid var(--line);color:var(--text);}
+  .btn-outline:hover{border-color:var(--pink);color:var(--pink);}
 
-    <!--==================== CSS ====================-->
-    <link rel="stylesheet" href="assets/css/styles.css">
-<!-- 
-    <link rel="icon" href="assets/img/favicon.png" /> -->
+  .stat-row{display:flex;gap:60px;flex-wrap:wrap;}
+  .stat-item .num{font-size:2.4rem;font-weight:700;color:var(--lime);font-family:'Space Grotesk',sans-serif;}
+  .stat-item .lbl{font-size:0.85rem;color:var(--muted);margin-top:2px;}
 
-    <title>Sweta Merai | Portfolio</title>
+  /* MARQUEE */
+  .marquee-wrap{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:18px 0;overflow:hidden;background:var(--bg-soft);
+  }
+  .marquee{display:flex;gap:50px;white-space:nowrap;animation:scroll-left 22s linear infinite;width:max-content;}
+  .marquee span{font-size:1rem;color:var(--muted);display:flex;align-items:center;gap:10px;}
+  .marquee span::after{content:"✦";color:var(--pink);}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* NUMBERED SECTIONS (skills as services) */
+  .num-block{
+    display:grid;grid-template-columns:140px 1fr;gap:40px;
+    padding:46px 0;border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .num-block:first-of-type{border-top:1px solid var(--line);}
+  .num-tag{font-size:0.85rem;color:var(--pink);font-weight:600;}
+  .num-block h2{font-size:1.8rem;font-weight:600;margin-bottom:10px;line-height:1.2;}
+  .num-block h2 .hl{color:var(--lime);}
+  .num-block p{color:var(--muted);max-width:560px;}
+  .num-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .num-tags span{font-size:0.75rem;color:var(--lime);background:rgba(198,255,61,0.08);padding:5px 12px;border-radius:20px;}
+
+  /* SKILLS - PROFESSIONAL CARD LAYOUT */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+  .skill-block{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:30px 26px;transition:border-color .3s, transform .3s;
+  }
+  .skill-block:hover{border-color:var(--lime);transform:translateY(-4px);}
+  .skill-block-head{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .skill-block-head .sb-icon{
+    width:38px;height:38px;border-radius:10px;
+    background:rgba(79,209,197,0.12);color:var(--lime);
+    display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .skill-block h3{font-size:1.05rem;font-weight:600;color:var(--text);}
+  .icon-grid{display:flex;flex-wrap:wrap;gap:12px;}
+  .icon-card{
+    background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;display:flex;align-items:center;gap:10px;
+    transition:transform .25s, border-color .25s;
+  }
+  .icon-card:hover{transform:translateY(-3px);border-color:var(--lime);}
+  .icon-card img{width:24px;height:24px;object-fit:contain;border-radius:4px;flex-shrink:0;}
+  .icon-card span{font-size:0.82rem;color:var(--text);white-space:nowrap;}
+
+  /* PROCESS */
+  .process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;}
+  .process-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;transition:transform .3s, border-color .3s;}
+  .process-card:hover{transform:translateY(-6px);border-color:var(--lime);}
+  .process-card .pn{font-size:0.85rem;color:var(--pink);font-weight:600;margin-bottom:14px;}
+  .process-card h4{font-size:1.1rem;margin-bottom:8px;}
+  .process-card p{color:var(--muted);font-size:0.9rem;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:center;}
+  .about-stats{display:flex;flex-direction:column;gap:16px;}
+  .about-stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center;}
+  .about-stat .num{font-size:1.8rem;font-weight:700;color:var(--lime);font-family:'Space Grotesk',sans-serif;}
+  .about-stat .lbl{font-size:0.78rem;color:var(--muted);margin-top:4px;}
+  .about-text p{color:var(--muted);line-height:1.8;margin-bottom:16px;}
+  .about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .about-tags span{font-size:0.78rem;color:var(--text);border:1px solid var(--line);padding:6px 14px;border-radius:20px;}
+
+  /* TIMELINE / QUALIFICATION */
+  .tabs{display:flex;gap:14px;margin-bottom:40px;}
+  .tab-btn{padding:10px 24px;border-radius:30px;border:1px solid var(--line);color:var(--muted);font-size:0.9rem;cursor:pointer;background:none;transition:.25s;}
+  .tab-btn.active{background:var(--lime);color:#0B0C10;border-color:var(--lime);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .tl{position:relative;padding-left:30px;border-left:2px solid var(--line);}
+  .tl-item{position:relative;margin-bottom:34px;}
+  .tl-item::before{content:"";position:absolute;left:-37px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--pink);}
+  .tl-date{font-size:0.78rem;color:var(--lime);font-weight:600;margin-bottom:4px;}
+  .tl-role{font-size:1.15rem;font-weight:600;}
+  .tl-org{font-size:0.88rem;color:var(--muted);}
+
+  /* CTA */
+  .cta{
+    text-align:center;background:var(--card);border-radius:24px;padding:70px 6%;
+    border:1px solid var(--line);position:relative;overflow:hidden;
+  }
+  .cta::before{
+    content:"";position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,61,174,0.18), transparent 70%);
+  }
+  .cta .section-tag{color:var(--pink);font-weight:600;font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;}
+  .cta h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:18px;}
+  .cta h2 .hl{color:var(--lime);}
+  .cta p{color:var(--muted);max-width:480px;margin:0 auto 30px;}
+
+  footer{
+    border-top:1px solid var(--line);padding:30px 6%;
+    display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.85rem;
+  }
+
+  /* CHATBOT */
+  #chat-toggle{
+    position:fixed;bottom:26px;right:26px;width:58px;height:58px;border-radius:50%;
+    background:var(--lime);color:#0B0C10;border:none;font-size:1.4rem;cursor:pointer;
+    box-shadow:0 8px 22px rgba(198,255,61,0.3);z-index:200;
+  }
+  #chat-widget{
+    position:fixed;bottom:96px;right:26px;width:320px;max-height:440px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 14px 34px rgba(0,0,0,0.5);display:none;flex-direction:column;z-index:200;overflow:hidden;
+  }
+  #chat-widget.open{display:flex;}
+  #chat-header{background:var(--bg-soft);padding:14px 16px;font-size:0.85rem;display:flex;justify-content:space-between;align-items:center;}
+  #chat-header button{background:none;border:none;color:var(--text);cursor:pointer;}
+  #chat-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:0.86rem;}
+  .chat-msg{max-width:85%;padding:9px 12px;border-radius:10px;line-height:1.4;}
+  .chat-msg.bot{background:var(--bg-soft);align-self:flex-start;}
+  .chat-msg.user{background:var(--lime);color:#0B0C10;align-self:flex-end;}
+  #chat-form{display:flex;border-top:1px solid var(--line);}
+  #chat-input{flex:1;border:none;padding:12px 14px;background:var(--card);color:var(--text);font-family:inherit;font-size:0.85rem;}
+  #chat-input:focus{outline:none;}
+  #chat-form button{background:var(--lime);color:#0B0C10;border:none;width:46px;cursor:pointer;}
+
+  @media(max-width:860px){
+    nav{display:none;}
+    .num-block{grid-template-columns:1fr;gap:14px;}
+    .about-grid{grid-template-columns:1fr;}
+    section{padding:90px 6% 50px;}
+  }
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal-left.in{opacity:1;transform:translateX(0);}
+
+  @media(prefers-reduced-motion:reduce){
+    .reveal,.reveal-left{transition:none;opacity:1;transform:none;}
+  }
+</style>
 </head>
-
 <body>
-    <!--==================== HEADER ====================-->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="" class="nav__logo">Sweta Merai</a>
 
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list grid">
-                    <li class="nav__item">
-                        <a href="#home" class="nav__link active-link">
-                            <i class="uil uil-estate nav__icon"></i> Home
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#about" class="nav__link">
-                            <i class="uil uil-user nav__icon"></i> About
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#skills" class="nav__link">
-                            <i class="uil uil-file-alt nav__icon"></i> Skills
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#experience" class="nav__link">
-                            <i class="uil uil-file-alt nav__icon"></i> Experience
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#contact" class="nav__link">
-                            <i class="uil uil-message nav__icon"></i> Contact Me
-                        </a>
-                    </li>
-                </ul>
-                <i class="uil uil-times nav__close" id="nav-close"></i>
-            </div>
-
-            <div class="nav__btns">
-                <!-- Theme Change Button -->
-                <i class="uil uil-sun change-theme" id="theme-button"></i>
-
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="uil uil-apps"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!--==================== MAIN ====================-->
-    <main class="main">
-        <!--==================== HOME ====================-->
-        <section class="home section" id="home">
-            <div class="home__container container grid">
-                <div class="home__content grid">
-                    <div class="home__social">
-                        <a href="https://www.linkedin.com/in/sweta-merai/" target="_blank"
-                            class="home__social-icon">
-                            <i class="uil uil-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/swetamerai/" target="_blank" class="home__social-icon">
-                            <i class="uil uil-github-alt"></i>
-                        </a>
-                    </div>
-                    <!-- <div class="home__img">
-                        <img src="assets/img/ChaitaliMerai.jpg" alt="Chaitali Merai Profile">
-                    </div> -->
-                    <div class="home__data">
-                        <h1 class="home__title">Hi, I'm Sweta Merai</h1>
-                        <h2 class="home_subtitle"><span class=" auto-type"></span>
-                        </h2>
-                        <p class="home__description">Experienced WordPress Developer focused on backend, frontend, and website optimization for speed and performance.</p>
-
-                        <!-- <a download="" href="assets/pdf/Chaitali_Merai_Resume.pdf" class="button button--flex"> -->
-                        <a download="" href="assets/pdf/Sweta_Merai_Resume.pdf" class="button button--flex">
-                            Download CV<i class="uil uil-download-alt button__icon"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="home__scroll">
-                    <a href="#about" class="home__scroll-button button--flex">
-                        <i class="uil uil-mouse-alt home__scroll-mouse"></i>
-                        <span class="home__scroll-name">Scroll Down</span>
-                        <i class="uil uil-arrow-down home__scroll-arrow"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== ABOUT ====================-->
-        <section class="about section" id="about">
-            <h2 class="section__title">About Me</h2>
-            <span class="section__subtitle">My Introduction</span>
-
-            <div class="about__container container">
-                <!-- <img src="assets/img/pic.png" alt="" class="about__img"> -->
-
-                <div class="about__data">
-                    <p class="about__description">
-                    <p class="home__description">
-                        Results-driven WordPress Developer with 3+ years of experience in custom theme and plugin development, focusing on
-                        functionality, scalability, and performance. Proficient in PHP, JavaScript, MySQL, and WordPress core functions, with hands-on
-                        experience in building Gutenberg blocks and integrating Advanced Custom Fields (ACF). Skilled in API integration, database ha ndling,
-                        and performance optimization. Strong understanding of WordPress hooks, filters, and custom post types, with a proven ability to debug
-                        errors efficiently and solve complex problems.
-                    </p>
-                    </p>
-                    <div class="about__info">
-                        <div>
-                            <span class="about__info-title">03+</span>
-                            <span class="about__info-name">Years <br> Experience</span>
-                        </div>
-
-                        <div>
-                            <span class="about__info-title">10+</span>
-                            <span class="about__info-name">Completed <br> Projects</span>
-                        </div>
-
-                    </div>
-
-                    <div class="about__buttons">
-                        <a href="#contact" class="button button--flex">
-                            Contact Me <i class="uil uil-message button__icon"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== SKILLS ====================-->
-        <section class="skills section" id="skills">
-            <h2 class="section__title">Skills</h2>
-            <span class="section__subtitle">My Technical Skills</span>
-
-            <div class="skills__container container grid">
-                <div>
-                    <!-- ==================== SKILLS 1 ==================== -->
-                    <div class="skills__content skills__open">
-                        <div class="skills__header">
-                            <i class="uil uil-brackets-curly skills__icon"></i>
-
-                            <div>
-                                <h1 class="skills__title">Frontend</h1>
-                                <!-- <span class="skills__subtitle">More Than 1 Year</span> -->
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" />
-                                    </span>
-                                    <h3 class="skills__name">HTML5</h3>
-                                </div>
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" />
-                                    </span>
-                                    <h3 class="skills__name">CSS3</h3>
-                                </div>
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="./assets/img/SCSS.png" />
-                                    </span>
-                                    <h3 class="skills__name">SCSS</h3>
-                                </div>
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="assets/img/bootsrap.svg" />
-                                    </span>
-                                    <h3 class="skills__name">Bootsrap 5.3</h3>
-                                </div>
-
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original-wordmark.svg" />
-                                    </span>
-                                    <h3 class="skills__name">jQuery</h3>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <!-- ==================== SKILLS 1 ==================== -->
-
-                    <div class="skills__content skills__open">
-                        <div class="skills__header">
-                            <i class="uil uil-brackets-curly skills__icon"></i>
-
-                            <div>
-                                <h1 class="skills__title">Wordpress Frontend</h1>
-                                <!-- <span class="skills__subtitle">More Than 1 Year</span> -->
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="./assets/img/t_500x300.jpeg" />
-                                    </span>
-                                    <h3 class="skills__name">Elementor</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <!-- ==================== SKILLS 3 ==================== -->
-                    <div class="skills__content skills__open">
-                        <div class="skills__header">
-                            <i class="uil uil-database skills__icon"></i>
-
-                            <div>
-                                <h1 class="skills__title">Database</h1>
-                                <!-- <span class="skills__subtitle">More Than 6 Months</span> -->
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="./assets/img/mysql.png" />
-                                    </span>
-                                    <h3 class="skills__name">My SQL</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <!-- ==================== SKILLS 6 ==================== -->
-                    <div class="skills__content skills__open">
-                        <div class="skills__header">
-                            <i class="uil uil-brush-alt skills__icon"></i>
-                            <!-- <img src="assets/img/dev-tools.png" class="skills_img" alt="Development Tools" /> -->
-                            <div>
-                                <h1 class="skills__title">Backend</h1>
-                                <!-- <span class="skills__subtitle">More Than 6 Months</span> -->
-                            </div>
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="./assets/img/php.png" />
-                                    </span>
-                                    <h3 class="skills__name">PHP</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="./assets/img/wordpress.png" />
-                                    </span>
-                                    <h3 class="skills__name">WordPress</h3>
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="./assets/img/wocommerce.png" />
-                                    </span>
-                                    <h3 class="skills__name">Wocommerce</h3>
-                                </div>
-                            </div>
-                        </div>   
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="./assets/img/acf-logo.png" />
-                                    </span>
-                                    <h3 class="skills__name">ACF</h3>
-                                </div>
-                            </div>
-                        </div>               
-                    </div>
-                </div>
-                <div>
-                    <!-- ==================== SKILLS 5 ==================== -->
-                    <div class="skills__content skills__open">
-                        <div class="skills__header">
-                            <i class="uil uil-code-branch skills__icon"></i>
-                            <div>
-                                <h1 class="skills__title">Version Control</h1>
-                                <!-- <span class="skills__subtitle">More Than 6 Months</span> -->
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__titles">
-                                <span class="skills_icon">
-                                    <img src="./assets/img/github.png" />
-                                </span>
-                                <h3 class="skills__name">GitHub</h3>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <!-- ==================== SKILLS 6 ==================== -->
-                    <div class="skills__content skills__open">
-                        <div class="skills__header">
-                            <i class="uil uil-brush-alt skills__icon"></i>
-                            <!-- <img src="assets/img/dev-tools.png" class="skills_img" alt="Development Tools" /> -->
-                            <div>
-                                <h1 class="skills__title">Tools</h1>
-                                <!-- <span class="skills__subtitle">More Than 6 Months</span> -->
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg" />
-                                    </span>
-                                    <h3 class="skills__name">VS Code</h3>
-                                </div>
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img src="assets/img/visual_studio2.png" />
-                                    </span>
-                                    <h3 class="skills__name">Visual Studio</h3>
-                                </div>
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" />
-                                    </span>
-                                    <h3 class="skills__name">Postman</h3>
-                                </div>
-                                <div class="skills__titles">
-                                    <span class="skills_icon">
-                                        <img
-                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original-wordmark.svg" />
-                                    </span>
-                                    <h3 class="skills__name">Jira</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== QUALIFICATION ====================-->
-        <section class="qualification section" id="experience">
-            <h2 class="section__title">Qualification</h2>
-            <span class="section__subtitle">My Professional Journey</span>
-
-            <div class="qualification__container container">
-                <div class="qualification__tabs">
-                    <div class="qualification__button button--flex qualification__active" data-target="#work">
-                        <i class="uil uil-briefcase-alt qualification__icon"></i>
-                        Work
-                    </div>
-                    <div class="qualification__button button--flex" data-target="#education">
-                        <i class="uil uil-graduation-cap qualification__icon"></i>
-                        Education
-                    </div>
-                </div>
-
-                <div class="qualification__sections">
-                    <!--==================== QUALIFICATION CONTENT 1 ====================-->
-                    <div class="qualification__content" data-content id="education">
-                        <!--==================== QUALIFICATION 1 ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Master of computer application</h3>
-                                <span class="qualification__subtitle">Gujarat Technological University</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Jan 2020 - April 2022
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-                        <!--==================== QUALIFICATION 2 ====================-->
-                        <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            <div>
-                                <h3 class="qualification__title">Bachelor of Computer Application</h3>
-                                <span class="qualification__subtitle">Veer Narmad South Gujarat University, India</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Jan 2018 - April 2020
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--==================== WORK CONTENT ====================-->
-                    <div class="qualification__content qualification__active" data-content id="work">
-                        <!--==================== WORK 8 ====================-->
-                        
-
-                        <!--==================== WORK 7 ====================-->
-                        
-                        <!--==================== WORK 6 ====================-->
-                        <!-- <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-
-                            <div>
-                                <h3 class="qualification__title">Web Developer</h3>
-                                <span class="qualification__subtitle">Seawind Solutions Pvt. Ltd.</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Feb 2021 - April 2021
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-
-                            <div>
-                                <h3 class="qualification__title">Wordpress Developer</h3>
-                                <span class="qualification__subtitle">August Infotech</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    1 July 2022 - Present
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--==================== WORK 3 ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Intership</h3>
-                                <span class="qualification__subtitle">August Infotech</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    3 january 2022 - 1 July 2022
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== CONTACT ME ====================-->
-        <section class="contact section" id="contact">
-            <h3 class="section__title">Contact Me</h3>
-            <span class="section__subtitle">Get In Touch</span>
-
-            <div class="contact__container container grid">
-                <div>
-                    <div class="contact__information">
-                        <i class="uil uil-envelope contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">Email</h3>
-                            <span class="contact__subtitle">meraisweta11@gmail.com</span>
-                        </div>
-                    </div>
-
-                    <div class="contact__information">
-                        <i class="uil uil-map-marker contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">Location</h3>
-                            <span class="contact__subtitle">Dharampur - Valsad</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 
-                    Place this URL in the form's action attribute, set the method to POST, and add a name attribute to each input.
-                    https://formspree.io/f/xoveavzg 
-                -->
-
-                <form action="https://formspree.io/f/xoveavzg" class="contact__form grid" method="POST">
-                    <div id="success-message" class="success-message" style="display: none;">
-                        <p>Your message has been sent successfully!</p>
-                    </div>
-                    <div class="contact__inputs grid">
-                        <div class="contact__content">
-                            <label for="" class="contact__label">Name</label>
-                            <input type="text" name="name" class="contact__input" required="1">
-                        </div>
-
-                        <div class="contact__content">
-                            <label for="" class="contact__label">Email</label>
-                            <input type="email" class="contact__input" name="email" required="1">
-                        </div>
-                    </div>
-                    <div class="contact__content">
-                        <label for="" class="contact__label">Message</label>
-                        <textarea name="message" id="" cols="0" rows="7" class="contact__input" required="1"></textarea>
-                    </div>
-
-                    <div>
-                        <button type="submit" class="button button--flex">
-                            Send Message
-                            <i class="uil uil-message button__icon"></i>
-                            <!-- <a href="#" class="button button--flex" type="submit">
-                                    Send Message
-                                    <i class="uil uil-message button__icon"></i>
-                                </a> -->
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <!--==================== FOOTER ====================-->
-    <footer class="footer">
-        <div class="footer__bg">
-            <div class="footer__container container grid">
-                <div>
-                    <div class="footer__title">Sweta Merai</div>
-                    <span class="footer__subtitle">Wordpress Developer</span>
-                </div>
-
-                <ul class="footer__links">
-                    <li>
-                        <a href="#about" class="footer__link">About</a>
-                    </li>
-                    <li>
-                        <a href="#experience" class="footer__link">Experience</a>
-                    </li>
-                    <li>
-                        <a href="#skills" class="footer__link">Skills</a>
-                    </li>
-                    <!-- <li>
-                        <a href="#services" class="footer__link">Services</a>
-                    </li>
-
-                    <li>
-                        <a href="#project" class="footer__link">Projects</a>
-                    </li> -->
-
-                    <!-- <li>
-                        <a href="#contact" class="footer__link">Get In Touch</a>
-                    </li> -->
-                </ul>
-
-                <div class="footer__socials">
-                    <a href="https://www.linkedin.com/in/sweta-merai" target="_blank"
-                        class="footer__social">
-                        <i class="uil uil-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/swetamerai/" target="_blank" class="footer__social">
-                        <i class="uil uil-github-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!--==================== SCROLL TOP ====================-->
-    <a href="" class="scrollup" id="scroll-up">
-        <i class="uil uil-arrow-up scrollup__icon"></i>
-    </a>
-
-    <!--==================== SWIPER JS ====================-->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-
-    <!--==================== MAIN JS ====================-->
-    <script src="assets/js/main.js"></script>
-
-    <script src="assets/js/auto-type.js"></script>
-
-    <script>
-        var typed = new Typed(".auto-type", {
-            strings: ["Wordpress Developer"],
-            typeSpeed: 40,
-            backSpeed: 40,
-            loop: true
-        })
-    </script>
-
-    <!--==================== CUSTOM CHATBOT ====================-->
-    <style>
-      .chatbot-fab {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        background: #4f8cff;
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 56px;
-        height: 56px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        font-size: 28px;
-        cursor: pointer;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-      }
-      .chatbot-fab:hover { background: #3561b7; }
-      .chatbot-window {
-        position: fixed;
-        bottom: 100px;
-        right: 32px;
-        width: 320px;
-        max-width: 90vw;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-        display: none;
-        flex-direction: column;
-        z-index: 9999;
-        overflow: hidden;
-        border: 1px solid #e0e0e0;
-      }
-      .chatbot-window.active { display: flex; }
-      .chatbot-header {
-        background: #4f8cff;
-        color: #fff;
-        padding: 16px;
-        font-weight: 600;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .chatbot-close {
-        background: none;
-        border: none;
-        color: #fff;
-        font-size: 20px;
-        cursor: pointer;
-      }
-      .chatbot-messages {
-        padding: 16px;
-        height: 220px;
-        overflow-y: auto;
-        background: #f9f9f9;
-        font-size: 15px;
-        flex: 1;
-      }
-      .chatbot-input-area {
-        display: flex;
-        border-top: 1px solid #eee;
-        background: #fafbfc;
-      }
-      .chatbot-input {
-        flex: 1;
-        border: none;
-        padding: 12px;
-        font-size: 15px;
-        outline: none;
-        background: transparent;
-      }
-      .chatbot-send {
-        background: #4f8cff;
-        color: #fff;
-        border: none;
-        padding: 0 18px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 0 0 16px 0;
-        transition: background 0.2s;
-      }
-      .chatbot-send:hover { background: #3561b7; }
-      .chatbot-msg-bot {
-        background: #e8f0fe;
-        color: #222;
-        padding: 8px 12px;
-        border-radius: 12px 12px 12px 0;
-        margin-bottom: 8px;
-        max-width: 80%;
-        align-self: flex-start;
-      }
-      .chatbot-msg-user {
-        background: #4f8cff;
-        color: #fff;
-        padding: 8px 12px;
-        border-radius: 12px 12px 0 12px;
-        margin-bottom: 8px;
-        max-width: 80%;
-        align-self: flex-end;
-      }
-    </style>
-    <div class="chatbot-fab" id="chatbotFab" title="Chat with me">
-      <i class="uil uil-comment-dots"></i>
-    </div>
-    <div class="chatbot-window" id="chatbotWindow">
-      <div class="chatbot-header">
-        Chatbot
-        <button class="chatbot-close" id="chatbotClose">&times;</button>
+<header>
+  <div class="logo">Sweta<span>.dev</span></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#process">Process</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="mailto:meraisweta11@gmail.com" class="hire-btn">Hire Me</a>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-tag">WordPress Developer</div>
+  <h1>I Build WordPress Sites That <span class="hl">Actually Perform.</span></h1>
+  <p>Custom themes, Gutenberg blocks, and scalable plugin development — focused on speed, functionality, and clean code that just works.</p>
+  <div class="btn-row">
+    <a href="assets/pdf/Sweta_Merai_Resume.pdf" class="btn btn-fill">Download CV ↓</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+  <div class="stat-row">
+    <div class="stat-item"><div class="num" data-count="4" data-suffix="+">0+</div><div class="lbl">Years Experience</div></div>
+    <div class="stat-item"><div class="num" data-count="10" data-suffix="+">0+</div><div class="lbl">Projects Delivered</div></div>
+    <div class="stat-item"><div class="num" data-count="5" data-suffix="+">0+</div><div class="lbl">API Integrations</div></div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<section id="skills">
+  <div style="text-align:center;margin-bottom:50px;">
+    <div class="hero-tag" style="justify-content:center;display:flex;">My Technical Skills</div>
+    <h2 style="font-size:2.2rem;">Skills</h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-block reveal">
+      <div class="skill-block-head"><div class="sb-icon">🎨</div><h3>Frontend</h3></div>
+      <div class="icon-grid">
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"><span>HTML5</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"><span>CSS3</span></div>
+        <div class="icon-card"><img src="assets/img/SCSS.png"><span>SCSS</span></div>
+        <div class="icon-card"><img src="assets/img/bootsrap.svg"><span>Bootstrap 5.3</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original-wordmark.svg"><span>jQuery</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"><span>React.js</span></div>
       </div>
-      <div class="chatbot-messages" id="chatbotMessages">
-        <div class="chatbot-msg-bot">Hi! 👋 How can I help you today?</div>
-      </div>
-      <form class="chatbot-input-area" id="chatbotForm" autocomplete="off">
-        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message..." required />
-        <button type="submit" class="chatbot-send">Send</button>
-      </form>
     </div>
-    <script>
-      // Chatbot UI logic
-      const fab = document.getElementById('chatbotFab');
-      const windowEl = document.getElementById('chatbotWindow');
-      const closeBtn = document.getElementById('chatbotClose');
-      const form = document.getElementById('chatbotForm');
-      const input = document.getElementById('chatbotInput');
-      const messages = document.getElementById('chatbotMessages');
-      fab.onclick = () => windowEl.classList.add('active');
-      closeBtn.onclick = () => windowEl.classList.remove('active');
-      function botReply(userMsg) {
-        userMsg = userMsg.toLowerCase();
-        if(userMsg.includes('hello') || userMsg.includes('hi')) return "Hello! How can I assist you?";
-        if(userMsg.includes('portfolio')) return "This is Sweta Merai's professional portfolio. Want to know more?";
-        if(userMsg.includes('contact')) return "You can contact me via the form on this page or email meraisweta11@gmail.com.";
-        if(userMsg.includes('skills')) return "I am skilled in WordPress, PHP, MySQL, frontend & backend development, and more.";
-        if(userMsg.includes('experience')) return "I have 3+ years of experience as a WordPress Developer at August Infotech.";
-        if(userMsg.includes('cv') || userMsg.includes('resume')) return "You can download my CV from the Home section above.";
-        return "Sorry, I didn't understand that. Please ask about my skills, experience, or contact info!";
-      }
-      form.onsubmit = function(e) {
-        e.preventDefault();
-        const userMsg = input.value.trim();
-        if(!userMsg) return;
-        const userDiv = document.createElement('div');
-        userDiv.className = 'chatbot-msg-user';
-        userDiv.textContent = userMsg;
-        messages.appendChild(userDiv);
-        setTimeout(() => {
-          const botDiv = document.createElement('div');
-          botDiv.className = 'chatbot-msg-bot';
-          botDiv.textContent = botReply(userMsg);
-          messages.appendChild(botDiv);
-          messages.scrollTop = messages.scrollHeight;
-        }, 500);
-        input.value = '';
-        messages.scrollTop = messages.scrollHeight;
-      };
-    </script>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-head"><div class="sb-icon">⚙️</div><h3>Backend & CMS</h3></div>
+      <div class="icon-grid">
+        <div class="icon-card"><img src="assets/img/php.png"><span>PHP</span></div>
+        <div class="icon-card"><img src="assets/img/wordpress.png"><span>WordPress</span></div>
+        <div class="icon-card"><img src="assets/img/wocommerce.png"><span>WooCommerce</span></div>
+        <div class="icon-card"><img src="assets/img/acf-logo.png"><span>ACF</span></div>
+        <div class="icon-card"><img src="assets/img/mysql.png"><span>MySQL</span></div>
+        <div class="icon-card"><img src="assets/img/t_500x300.jpeg"><span>Elementor</span></div>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-head"><div class="sb-icon">🛠️</div><h3>Tools & Workflow</h3></div>
+      <div class="icon-grid">
+        <div class="icon-card"><img src="assets/img/github.png"><span>GitHub</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg"><span>VS Code</span></div>
+        <div class="icon-card"><img src="assets/img/visual_studio2.png"><span>Visual Studio</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg"><span>Postman</span></div>
+        <div class="icon-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original-wordmark.svg"><span>Jira</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div style="text-align:center;margin-bottom:50px;">
+    <div class="hero-tag" style="justify-content:center;display:flex;">How I Work</div>
+    <h2 style="font-size:2.2rem;">From Brief to <span style="color:var(--lime);">Launch</span></h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-card reveal">
+      <div class="pn">01</div>
+      <h4>Requirement Gathering</h4>
+      <p>Understand the client's goals, scope, and technical needs before writing a single line of code.</p>
+    </div>
+    <div class="process-card reveal">
+      <div class="pn">02</div>
+      <h4>Design & Development</h4>
+      <p>Build the theme/plugin with Gutenberg blocks, ACF, and clean, scalable PHP architecture.</p>
+    </div>
+    <div class="process-card reveal">
+      <div class="pn">03</div>
+      <h4>Testing & Review</h4>
+      <p>Debug, optimize, and refine — with client feedback built directly into the sprint cycle.</p>
+    </div>
+    <div class="process-card reveal">
+      <div class="pn">04</div>
+      <h4>Deploy & Support</h4>
+      <p>Ship via CI/CD pipelines, then stay on for ongoing support and performance monitoring.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-stats">
+      <div class="about-stat reveal"><div class="num" data-count="4" data-suffix="+">0+</div><div class="lbl">Years Experience</div></div>
+      <div class="about-stat reveal"><div class="num" data-count="10" data-suffix="+">0+</div><div class="lbl">Projects Delivered</div></div>
+      <div class="about-stat reveal"><div class="num" data-count="5" data-suffix="+">0+</div><div class="lbl">API Integrations</div></div>
+    </div>
+    <div class="about-text">
+      <div class="hero-tag">About Me</div>
+      <h2 style="font-size:2rem;margin-bottom:18px;">Hi, I'm Sweta Merai — <span style="color:var(--lime);">WordPress Developer</span></h2>
+      <p>Results-driven WordPress Developer with 4+ years of experience in custom theme and plugin development, focused on functionality, scalability, and performance.</p>
+      <p>Proficient in PHP, JavaScript, MySQL, and WordPress core functions, with hands-on experience building Gutenberg blocks and integrating ACF. Skilled in API integration, database handling, and debugging complex problems efficiently.</p>
+      <div class="about-tags">
+        <span>PHP (OOP)</span><span>WordPress</span><span>Gutenberg</span><span>ACF</span><span>WooCommerce</span><span>MySQL</span><span>Git</span><span>Docker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div style="text-align:center;margin-bottom:50px;">
+    <div class="hero-tag" style="justify-content:center;display:flex;">My Journey</div>
+    <h2 style="font-size:2.2rem;">Qualification</h2>
+  </div>
+  <div class="tabs" style="justify-content:center;">
+    <button class="tab-btn active" data-tab="work">Work</button>
+    <button class="tab-btn" data-tab="edu">Education</button>
+  </div>
+  <div class="tab-panel active" id="work" style="max-width:700px;margin:0 auto;">
+    <div class="tl">
+      <div class="tl-item reveal-left">
+        <div class="tl-date">1 July 2022 — Present</div>
+        <div class="tl-role">WordPress Developer</div>
+        <div class="tl-org">August Infotech, Surat</div>
+      </div>
+      <div class="tl-item reveal-left">
+        <div class="tl-date">3 January 2022 — 1 July 2022</div>
+        <div class="tl-role">Internship</div>
+        <div class="tl-org">August Infotech, Surat</div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-panel" id="edu" style="max-width:700px;margin:0 auto;">
+    <div class="tl">
+      <div class="tl-item reveal-left">
+        <div class="tl-date">Jan 2020 — April 2022</div>
+        <div class="tl-role">Master of Computer Application</div>
+        <div class="tl-org">Gujarat Technological University</div>
+      </div>
+      <div class="tl-item reveal-left">
+        <div class="tl-date">Jan 2018 — April 2020</div>
+        <div class="tl-role">Bachelor of Computer Application</div>
+        <div class="tl-org">Veer Narmad South Gujarat University, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="cta">
+    <div class="section-tag">Let's Work Together</div>
+    <h2>Ready to Build Something <span class="hl">Great?</span></h2>
+    <p>Open to new opportunities, freelance projects, and collaborations. I reply within 24 hours.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="mailto:meraisweta11@gmail.com" class="btn btn-fill">✉ Email Me</a>
+      <a href="https://www.linkedin.com/in/sweta-merai/" target="_blank" class="btn btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Sweta<span style="color:var(--lime);">.dev</span></div>
+  <div>© 2026 Sweta Merai · WordPress Developer</div>
+</footer>
+
+<button id="chat-toggle" aria-label="Open chat">💬</button>
+<div id="chat-widget">
+  <div id="chat-header">
+    <span>Chat with Sweta's assistant</span>
+    <button id="chat-close" aria-label="Close chat">✕</button>
+  </div>
+  <div id="chat-body"></div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" placeholder="Ask about skills, experience..." autocomplete="off">
+    <button type="submit">→</button>
+  </form>
+</div>
+
+<script>
+  function animateCount(el){
+    const target = parseInt(el.getAttribute('data-count'),10);
+    const suffix = el.getAttribute('data-suffix')||'';
+    const duration=1100, start=performance.now();
+    function step(now){
+      const p = Math.min((now-start)/duration,1);
+      el.textContent = Math.floor(p*target)+suffix;
+      if(p<1) requestAnimationFrame(step); else el.textContent=target+suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  const statObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); statObs.unobserve(e.target); } });
+  },{threshold:0.4});
+  document.querySelectorAll('[data-count]').forEach(el=>statObs.observe(el));
+
+  const revealObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el=>revealObs.observe(el));
+</script>
+
+<script>
+  const tags = ["WordPress","PHP","Gutenberg Blocks","ACF","WooCommerce","MySQL","React.js","Git","Docker","REST API","Bootstrap","jQuery"];
+  const marquee = document.getElementById('marquee');
+  const loopTags = [...tags, ...tags];
+  loopTags.forEach(t=>{
+    const span = document.createElement('span');
+    span.textContent = t;
+    marquee.appendChild(span);
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+<script>
+  const toggle = document.getElementById('chat-toggle');
+  const widget = document.getElementById('chat-widget');
+  const closeBtn = document.getElementById('chat-close');
+  const body = document.getElementById('chat-body');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  let greeted=false;
+  toggle.addEventListener('click', ()=>{
+    widget.classList.toggle('open');
+    if(!greeted){ addMsg("Hi! I'm Sweta's assistant 👋 Ask me about her skills, experience, or contact info.", 'bot'); greeted=true; }
+  });
+  closeBtn.addEventListener('click', ()=> widget.classList.remove('open'));
+
+  const faq = [
+    { keys:['skill','tech','stack','language'], reply:"Sweta works with PHP, JavaScript, React.js, WordPress (themes, plugins, Gutenberg blocks), ACF, WooCommerce, MySQL, REST APIs, Git, and Docker." },
+    { keys:['experience','years','work'], reply:"She has 4+ years of experience as a WordPress Developer at August Infotech, Surat." },
+    { keys:['contact','email','phone','reach','hire'], reply:"Email: meraisweta11@gmail.com" },
+    { keys:['resume','cv'], reply:"Use the 'Download CV' button at the top of the page." },
+    { keys:['location','based','where'], reply:"She's based in Dharampur, Valsad, India." },
+    { keys:['hello','hi','hey'], reply:"Hello! How can I help you learn more about Sweta's work?" }
+  ];
+  function getReply(msg){
+    const lower = msg.toLowerCase();
+    for(const f of faq){ if(f.keys.some(k=>lower.includes(k))) return f.reply; }
+    return "Thanks! For specific queries, email meraisweta11@gmail.com.";
+  }
+  form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const val = input.value.trim();
+    if(!val) return;
+    addMsg(val,'user'); input.value='';
+    setTimeout(()=>addMsg(getReply(val),'bot'),350);
+  });
+</script>
+
 </body>
-
 </html>
