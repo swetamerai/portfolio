@@ -455,3 +455,22 @@ img{max-width:100%;display:block;}
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
 }
+
+.cf-success {
+  background: rgba(17,153,142,0.12);
+  border: 1px solid rgba(17,153,142,0.4);
+  color: #38ef7d;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.cf-error {
+  background: rgba(236,78,100,0.1);
+  border: 1px solid rgba(236,78,100,0.35);
+  color: #fc8181;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
