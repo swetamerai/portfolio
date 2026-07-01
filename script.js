@@ -178,7 +178,7 @@ if(contactForm){
       btn.disabled = false;
     }
   });
-  
+}
 // Back to top button
 const backToTop = document.getElementById('backToTop');
 if(backToTop){
