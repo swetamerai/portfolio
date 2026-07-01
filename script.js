@@ -36,7 +36,6 @@ window.addEventListener('load', () => {
   }
 });
 
-
 // Skills tabs
 const skillsTabs = document.querySelectorAll('.skills-tab');
 const skillsPanels = document.querySelectorAll('.skills-panel');
@@ -51,10 +50,14 @@ skillsTabs.forEach(tab => {
   });
 });
 
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
 const root = document.documentElement;
 const savedTheme = localStorage.getItem('portfolio-theme');
-if(savedTheme){ root.setAttribute('data-theme', savedTheme); themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀'; }
-
+if(savedTheme){
+  root.setAttribute('data-theme', savedTheme);
+  themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀';
+}
 themeToggle.addEventListener('click', () => {
   const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
   const next = current === 'light' ? 'dark' : 'light';
@@ -99,7 +102,6 @@ const revealEls = document.querySelectorAll(
 );
 revealEls.forEach(el => {
   const rect = el.getBoundingClientRect();
-  // Only pre-hide elements that start below the viewport, so above-the-fold content is never invisible
   if(rect.top > window.innerHeight){
     el.classList.add('reveal', 'pre');
   }
@@ -116,7 +118,7 @@ const observer = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => observer.observe(el));
 
-// Safety net: guarantee nothing stays hidden, even if observer or JS timing fails
+// Safety net: guarantee nothing stays hidden
 setTimeout(() => {
   document.querySelectorAll('.reveal.pre').forEach(el => {
     el.classList.add('in');
@@ -124,7 +126,7 @@ setTimeout(() => {
   });
 }, 1200);
 
-// Contact form (frontend only — no backend)
+// Contact form — sends directly to meraisweta11@gmail.com via FormSubmit
 const contactForm = document.getElementById('contactForm');
 if(contactForm){
   contactForm.addEventListener('submit', async (e) => {
@@ -149,9 +151,9 @@ if(contactForm){
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          name:    name,
-          email:   email,
-          message: message,
+          name:     name,
+          email:    email,
+          message:  message,
           _subject: 'Portfolio Inquiry from ' + name,
           _captcha: 'false'
         })
@@ -179,6 +181,7 @@ if(contactForm){
     }
   });
 }
+
 // Back to top button
 const backToTop = document.getElementById('backToTop');
 if(backToTop){
