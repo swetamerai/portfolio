@@ -1,5 +1,5 @@
 // Typewriter effect for hero role text
-const roles = ["WordPress Developer", "PHP & WooCommerce Expert", "Building Sites That Perform"];
+const roles = ["WordPress Expert|", "PHP & WooCommerce Custom Development|", "Building Sites That Perform"];
 const twEl = document.getElementById('typewriter');
 let roleIndex = 0, charIndex = 0, deleting = false;
 
