@@ -126,31 +126,59 @@ setTimeout(() => {
 
 // Contact form (frontend only — no backend)
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('cf-name').value.trim();
-  const email = document.getElementById('cf-email').value.trim();
-  const message = document.getElementById('cf-message').value.trim();
+if(contactForm){
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const subject = encodeURIComponent('Portfolio Inquiry from ' + name);
-  const body = encodeURIComponent(
-    'Name: ' + name + '\n' +
-    'Email: ' + email + '\n\n' +
-    'Message:\n' + message
-  );
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+    const btn     = document.getElementById('cf-submit');
+    const success = document.getElementById('cf-success');
+    const errBox  = document.getElementById('cf-error');
 
-  const btn = contactForm.querySelector('button');
-  const original = btn.textContent;
-  btn.textContent = 'Opening email app…';
+    if(!name || !email || !message){ return; }
 
-  window.location.href = 'mailto:meraisweta11@gmail.com?subject=' + subject + '&body=' + body;
+    btn.textContent = 'Sending…';
+    btn.disabled    = true;
+    success.style.display = 'none';
+    errBox.style.display  = 'none';
 
-  setTimeout(() => {
-    btn.textContent = original;
-    contactForm.reset();
-  }, 1800);
-});
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/meraisweta11@gmail.com', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name:    name,
+          email:   email,
+          message: message,
+          _subject: 'Portfolio Inquiry from ' + name,
+          _captcha: 'false'
+        })
+      });
 
+      if(res.ok){
+        success.style.display = 'block';
+        contactForm.reset();
+        btn.textContent = 'Message Sent ✓';
+        btn.style.background = 'linear-gradient(100deg,#11998e,#38ef7d)';
+        setTimeout(() => {
+          btn.textContent = 'Send Message →';
+          btn.style.background = '';
+          btn.disabled = false;
+          success.style.display = 'none';
+        }, 5000);
+      } else {
+        throw new Error('Failed');
+      }
+    } catch(err) {
+      errBox.style.display = 'block';
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+      btn.disabled = false;
+    }
+  });
+  
 // Back to top button
 const backToTop = document.getElementById('backToTop');
 if(backToTop){
