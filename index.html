@@ -326,8 +326,13 @@
       <input type="text" id="cf-name" name="name" placeholder="Your name" required>
       <input type="email" id="cf-email" name="email" placeholder="Your email" required>
       <textarea rows="4" id="cf-message" name="message" placeholder="Your message" required></textarea>
-      <button type="submit" class="btn btn-primary">Send Message →</button>
-      <p class="contact-form-note">This opens your email app with the message pre-filled, addressed to meraisweta11@gmail.com.</p>
+      <button type="submit" class="btn btn-primary" id="cf-submit">Send Message →</button>
+      <div id="cf-success" class="cf-success" style="display:none">
+        ✅ Message sent! Sweta will reply within 24 hours.
+      </div>
+      <div id="cf-error" class="cf-error" style="display:none">
+        ❌ Something went wrong. Please email directly at meraisweta11@gmail.com
+      </div>
     </form>
   </div>
 </section>
