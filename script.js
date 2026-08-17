@@ -50,6 +50,20 @@ skillsTabs.forEach(tab => {
   });
 });
 
+// Project tabs (Personal / Professional)
+const projectsTabs = document.querySelectorAll('.projects-tab');
+const projectsPanels = document.querySelectorAll('.projects-panel-wrap');
+projectsTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    projectsTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.getAttribute('data-project-tab');
+    projectsPanels.forEach(panel => {
+      panel.hidden = panel.getAttribute('data-project-panel') !== target;
+    });
+  });
+});
+
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 const root = document.documentElement;
