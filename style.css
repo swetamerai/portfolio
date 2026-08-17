@@ -314,6 +314,23 @@ img{max-width:100%;display:block;}
   transition:transform .2s ease, border-color .2s ease;
 }
 .skills-panel span:hover{transform:translateY(-2px);border-color:rgba(139,92,246,0.4);}
+
+/* PROJECT TABS (Personal / Professional) */
+.projects-tabs{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:40px;
+}
+.projects-tab{
+  background:var(--surface);border:1px solid var(--border);color:var(--text-dim);
+  font-size:14px;font-weight:600;padding:11px 22px;border-radius:999px;cursor:pointer;
+  transition:all .25s ease;
+}
+.projects-tab:hover{color:var(--text);border-color:rgba(139,92,246,0.4);}
+.projects-tab.active{
+  background:var(--gradient);color:#fff;border-color:transparent;
+  box-shadow:0 6px 20px rgba(139,92,246,0.35);
+}
+.projects-panel-wrap[hidden]{display:none;}
+
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .projects-grid-2col{grid-template-columns:repeat(2,1fr);}
 .project-card-wide{grid-column:1 / -1;}
