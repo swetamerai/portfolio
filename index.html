@@ -209,112 +209,129 @@
     <p class="eyebrow-label">03 — PROJECTS</p>
     <h2 class="section-title">Things I've <span class="gradient-text">built.</span></h2>
 
-    <div class="projects-grid projects-grid-2col">
-
-      <article class="project-card project-card-wide">
-        <div class="project-body">
-          <h3>Sparkle — Full-Stack AI Chat Assistant</h3>
-          <a class="project-link" href="https://ai-chat-mu-taupe.vercel.app/" target="_blank" rel="noopener">ai-chat-mu-taupe.vercel.app ↗</a>
-          <p>Designed and built a production-ready AI chatbot from scratch — architected for security, scalability, and a polished user experience, not just a wrapper around an API. Went beyond a typical tutorial-style build by adding real authentication, persistent chat history, and a secure server-side integration layer.</p>
-          <ul class="project-points">
-            <li>Secure-by-design architecture — all Gemini API calls route through a Next.js server-side API layer, so the API key never reaches the client.</li>
-            <li>Integrated Supabase for authentication and chat history storage, letting users sign in and resume conversations across sessions.</li>
-            <li>Built real-time typing indicators, auto-scroll, and graceful error handling for a natural, responsive chat experience.</li>
-            <li>Deployed on Vercel with environment-based secret management, running entirely on free-tier infrastructure.</li>
-          </ul>
-          <div class="tags"><span>Next.js 15</span><span>TypeScript</span><span>Tailwind CSS</span><span>Google Gemini API</span><span>Supabase</span><span>Vercel</span></div>
-        </div>
-      </article>
-
-      <article class="project-card project-card-wide">
-        <div class="project-body">
-          <h3>Backend WooCommerce Functionality Customization</h3>
-          <p>Built a custom WordPress plugin that lets admins generate secure, single-use payment links for custom-priced tours directly from the admin panel — instantly shareable with customers via WhatsApp, without creating a booking through the API.</p>
-          <ul class="project-points">
-            <li>Admin panel to generate variable-priced payment links, integrated with WooCommerce & Tours CPT.</li>
-            <li>UUID-based tokens with 48-hour expiring transients for secure, single-use links.</li>
-            <li>Dynamic price injection into WooCommerce cart/checkout via custom hooks.</li>
-            <li>Recent Links tracking table with status, customer, price, and date.</li>
-            <li>APCO Pay gateway integration with booking API & email triggers disabled for these payments.</li>
-          </ul>
-          <div class="tags"><span>Custom Plugin</span><span>WooCommerce</span><span>AJAX</span><span>APCO Pay</span><span>Payment Links</span></div>
-        </div>
-      </article>
-
-      <article class="project-card project-card-wide">
-        <div class="project-body">
-          <h3>Grantee Map — Per-Record Geolocation &amp; Pin Clustering</h3>
-          <p>Fixed and rebuilt a grantee map feature so every grantee record shows its own individual pin, based on the exact geocoded coordinates for that record's city/state — instead of grouping all organizations in a country under a single shared pin.</p>
-          <ul class="project-points">
-            <li>Latitude/longitude fields added to each Grantee post for precise, per-record geocoding.</li>
-            <li>One pin per grantee, driven by the record's own coordinates rather than the associated country.</li>
-            <li>Automatic clustering — pins that are physically close together merge into a single larger pin.</li>
-            <li>Clicking a clustered pin opens a list of all grantees represented at that location.</li>
-            <li>Matched map behavior and interaction pattern to the existing Astraea and Trans Justice Funding Project maps.</li>
-          </ul>
-          <div class="tags"><span>Custom Post Type</span><span>Geocoding</span><span>Map Clustering</span><span>ACF</span></div>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-body">
-          <h3>Mozilla Firefox</h3>
-          <p>Created a WordPress theme using BarbaJS for smooth page transitions, custom WPForm customization, HTML5, and rich animations — from client requirement gathering through project planning and team execution.</p>
-          <div class="tags"><span>BarbaJS</span><span>WPForms</span><span>HTML5</span><span>Animations</span><span>Project Planning</span></div>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-body">
-          <h3>Building Survey Quotes.co.uk</h3>
-          <a class="project-link" href="https://building-survey-quotes.co.uk" target="_blank" rel="noopener">building-survey-quotes.co.uk ↗</a>
-          <p>Led a full website revamp using Gutenberg blocks (JSON format) and the ACF plugin, including custom WordPress theme development and site-wide performance optimization.</p>
-          <div class="tags"><span>Gutenberg</span><span>ACF</span><span>Theme Development</span><span>Optimization</span></div>
-        </div>
-      </article>
-
-      <article class="project-card project-card-wide">
-        <div class="project-body">
-          <h3>Building Survey Quotes.co.uk — Multi-Step Form Plugin</h3>
-          <p>Built a custom plugin that lets users easily configure form settings and build multi-step forms through an options page, with a shortcode system for embedding forms anywhere on the frontend.</p>
-          <ul class="project-points">
-            <li>Consent Settings — manage the consent message shortcode</li>
-            <li>Property Value Allowed Settings — control allowed property values</li>
-            <li>Mail Settings — manage recipient email addresses</li>
-            <li>Message, Page, Thank You Page &amp; Style Settings for full form customization</li>
-          </ul>
-          <p>Focused on creating an intuitive, no-code solution for building complex, customizable multi-step forms.</p>
-          <div class="tags"><span>Custom Plugin Dev</span><span>Shortcodes</span><span>Options API</span></div>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-body">
-          <h3>Nouv</h3>
-          <a class="project-link" href="https://nouv.com" target="_blank" rel="noopener">nouv.com ↗</a>
-          <p>WordPress Gutenberg blocks, ACF, theme development, and WooCommerce — including project planning &amp; analysis, user specification documentation, client requirement gathering, a header option for different pages, Bootstrap slider integration, and Filters Services pillars.</p>
-          <div class="tags"><span>Gutenberg</span><span>ACF</span><span>WooCommerce</span><span>Bootstrap</span></div>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-body">
-          <h3>August Infotech Website</h3>
-          <a class="project-link" href="https://augustinfotech.com" target="_blank" rel="noopener">augustinfotech.com ↗</a>
-          <p>WordPress Gutenberg block &amp; ACF theme development, AJAX-based blog PDF generation, podcast integration, Contact Form 7, Dropbox API with file upload on form submit, and on-page SEO optimization.</p>
-          <div class="tags"><span>Gutenberg</span><span>Dropbox API</span><span>Contact Form 7</span><span>SEO</span></div>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-body">
-          <h3>Trans Justice Funding Project</h3>
-          <a class="project-link" href="https://www.transjusticefundingproject.org/" target="_blank" rel="noopener">transjusticefundingproject.org ↗</a>
-          <p>WordPress Gutenberg blocks, ACF, and theme development with WPML multilingual support and Docker-based environments — covering project planning &amp; analysis, user specification documentation, and client requirement gathering.</p>
-          <div class="tags"><span>Gutenberg</span><span>WPML</span><span>Docker</span><span>ACF</span></div>
-        </div>
-      </article>
+    <!-- Personal / Professional switcher -->
+    <div class="projects-tabs" id="projectsTabs">
+      <button class="projects-tab active" data-project-tab="professional">💼 Professional</button>
+      <button class="projects-tab" data-project-tab="personal">🚀 Personal</button>
     </div>
+
+    <!-- PROFESSIONAL PROJECTS -->
+    <div class="projects-panel-wrap" data-project-panel="professional">
+      <div class="projects-grid projects-grid-2col">
+
+        <article class="project-card project-card-wide">
+          <div class="project-body">
+            <h3>Backend WooCommerce Functionality Customization</h3>
+            <p>Built a custom WordPress plugin that lets admins generate secure, single-use payment links for custom-priced tours directly from the admin panel — instantly shareable with customers via WhatsApp, without creating a booking through the API.</p>
+            <ul class="project-points">
+              <li>Admin panel to generate variable-priced payment links, integrated with WooCommerce & Tours CPT.</li>
+              <li>UUID-based tokens with 48-hour expiring transients for secure, single-use links.</li>
+              <li>Dynamic price injection into WooCommerce cart/checkout via custom hooks.</li>
+              <li>Recent Links tracking table with status, customer, price, and date.</li>
+              <li>APCO Pay gateway integration with booking API & email triggers disabled for these payments.</li>
+            </ul>
+            <div class="tags"><span>Custom Plugin</span><span>WooCommerce</span><span>AJAX</span><span>APCO Pay</span><span>Payment Links</span></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-wide">
+          <div class="project-body">
+            <h3>Grantee Map — Per-Record Geolocation &amp; Pin Clustering</h3>
+            <p>Fixed and rebuilt a grantee map feature so every grantee record shows its own individual pin, based on the exact geocoded coordinates for that record's city/state — instead of grouping all organizations in a country under a single shared pin.</p>
+            <ul class="project-points">
+              <li>Latitude/longitude fields added to each Grantee post for precise, per-record geocoding.</li>
+              <li>One pin per grantee, driven by the record's own coordinates rather than the associated country.</li>
+              <li>Automatic clustering — pins that are physically close together merge into a single larger pin.</li>
+              <li>Clicking a clustered pin opens a list of all grantees represented at that location.</li>
+              <li>Matched map behavior and interaction pattern to the existing Astraea and Trans Justice Funding Project maps.</li>
+            </ul>
+            <div class="tags"><span>Custom Post Type</span><span>Geocoding</span><span>Map Clustering</span><span>ACF</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-body">
+            <h3>Mozilla Firefox</h3>
+            <p>Created a WordPress theme using BarbaJS for smooth page transitions, custom WPForm customization, HTML5, and rich animations — from client requirement gathering through project planning and team execution.</p>
+            <div class="tags"><span>BarbaJS</span><span>WPForms</span><span>HTML5</span><span>Animations</span><span>Project Planning</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-body">
+            <h3>Building Survey Quotes.co.uk</h3>
+            <a class="project-link" href="https://building-survey-quotes.co.uk" target="_blank" rel="noopener">building-survey-quotes.co.uk ↗</a>
+            <p>Led a full website revamp using Gutenberg blocks (JSON format) and the ACF plugin, including custom WordPress theme development and site-wide performance optimization.</p>
+            <div class="tags"><span>Gutenberg</span><span>ACF</span><span>Theme Development</span><span>Optimization</span></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-wide">
+          <div class="project-body">
+            <h3>Building Survey Quotes.co.uk — Multi-Step Form Plugin</h3>
+            <p>Built a custom plugin that lets users easily configure form settings and build multi-step forms through an options page, with a shortcode system for embedding forms anywhere on the frontend.</p>
+            <ul class="project-points">
+              <li>Consent Settings — manage the consent message shortcode</li>
+              <li>Property Value Allowed Settings — control allowed property values</li>
+              <li>Mail Settings — manage recipient email addresses</li>
+              <li>Message, Page, Thank You Page &amp; Style Settings for full form customization</li>
+            </ul>
+            <p>Focused on creating an intuitive, no-code solution for building complex, customizable multi-step forms.</p>
+            <div class="tags"><span>Custom Plugin Dev</span><span>Shortcodes</span><span>Options API</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-body">
+            <h3>Nouv</h3>
+            <a class="project-link" href="https://nouv.com" target="_blank" rel="noopener">nouv.com ↗</a>
+            <p>WordPress Gutenberg blocks, ACF, theme development, and WooCommerce — including project planning &amp; analysis, user specification documentation, client requirement gathering, a header option for different pages, Bootstrap slider integration, and Filters Services pillars.</p>
+            <div class="tags"><span>Gutenberg</span><span>ACF</span><span>WooCommerce</span><span>Bootstrap</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-body">
+            <h3>August Infotech Website</h3>
+            <a class="project-link" href="https://augustinfotech.com" target="_blank" rel="noopener">augustinfotech.com ↗</a>
+            <p>WordPress Gutenberg block &amp; ACF theme development, AJAX-based blog PDF generation, podcast integration, Contact Form 7, Dropbox API with file upload on form submit, and on-page SEO optimization.</p>
+            <div class="tags"><span>Gutenberg</span><span>Dropbox API</span><span>Contact Form 7</span><span>SEO</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-body">
+            <h3>Trans Justice Funding Project</h3>
+            <a class="project-link" href="https://www.transjusticefundingproject.org/" target="_blank" rel="noopener">transjusticefundingproject.org ↗</a>
+            <p>WordPress Gutenberg blocks, ACF, and theme development with WPML multilingual support and Docker-based environments — covering project planning &amp; analysis, user specification documentation, and client requirement gathering.</p>
+            <div class="tags"><span>Gutenberg</span><span>WPML</span><span>Docker</span><span>ACF</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- PERSONAL PROJECTS -->
+    <div class="projects-panel-wrap" data-project-panel="personal" hidden>
+      <div class="projects-grid projects-grid-2col">
+
+        <article class="project-card project-card-wide">
+          <div class="project-body">
+            <h3>Sparkle — Full-Stack AI Chat Assistant</h3>
+            <a class="project-link" href="https://ai-chat-mu-taupe.vercel.app/" target="_blank" rel="noopener">ai-chat-mu-taupe.vercel.app ↗</a>
+            <p>Designed and built a production-ready AI chatbot from scratch — architected for security, scalability, and a polished user experience, not just a wrapper around an API. Went beyond a typical tutorial-style build by adding real authentication, persistent chat history, and a secure server-side integration layer.</p>
+            <ul class="project-points">
+              <li>Secure-by-design architecture — all Gemini API calls route through a Next.js server-side API layer, so the API key never reaches the client.</li>
+              <li>Integrated Supabase for authentication and chat history storage, letting users sign in and resume conversations across sessions.</li>
+              <li>Built real-time typing indicators, auto-scroll, and graceful error handling for a natural, responsive chat experience.</li>
+              <li>Deployed on Vercel with environment-based secret management, running entirely on free-tier infrastructure.</li>
+            </ul>
+            <div class="tags"><span>Next.js 15</span><span>TypeScript</span><span>Tailwind CSS</span><span>Google Gemini API</span><span>Supabase</span><span>Vercel</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
